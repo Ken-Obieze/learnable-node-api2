@@ -6,7 +6,7 @@ const roomSchema = new mongoose.Schema({
         required: [true, 'Room name is required']
       },
       roomType: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'RoomType',
         required: [true, 'Room type is required']
       },

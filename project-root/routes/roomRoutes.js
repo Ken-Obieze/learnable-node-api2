@@ -1,22 +1,48 @@
 const express = require('express');
 const router = express.Router();
-const Room = require('../models/roomModel');
-const RoomType = require('../models/roomTypeModel');
-const roomTypeController = require('../controllers/roomTypeController');
 const roomController = require('../controllers/roomController');
+const { authenticateToken, authorizeRoles } = require('../middleware/authMiddleware');
 
-// Routes for Room Types
-router.post('/types', roomTypeController.createRoomType);
-router.get('/types', roomTypeController.getAllRoomTypes);
 
 // Routes for Rooms
-router.post('/', roomController.createRoom);
-router.get('/', roomController.getAllRooms);
-router.patch('/:roomId', roomController.updateRoom);
-router.delete('/:roomId', roomController.deleteRoom);
-router.get('/:roomId', roomController.getRoomById);
-
-// Protected route requiring authentication and admin role
-router.post('/', authenticateToken, authorizeRoles(['admin']), validateData(roomSchema), async (req, res) => {
+router.post('/', authenticateToken, authorizeRoles(['admin']), async (req, res) => {
+    try {
+        await roomController.createRoom(req, res);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
 });
+
+router.get('/', async (req, res) => {
+    try {
+        await roomController.getAllRooms(req, res);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.patch('/:roomId', authenticateToken, authorizeRoles(['admin']), async (req, res) => {
+    try {
+        await roomController.updateRoom(req, res);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+router.delete('/:roomId', authenticateToken, authorizeRoles(['admin']), async (req, res) => {
+    try {
+        await roomController.deleteRoom(req, res);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.get('/:roomId', async (req, res) => {
+    try {
+        await roomController.getRoomById(req, res);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;

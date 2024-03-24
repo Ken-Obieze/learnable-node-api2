@@ -14,7 +14,7 @@ This is a RESTful API for a hotel management system, built using Node.js and Exp
 
 ```bash
 # Clone the repository
-git clone https://github.com/Ken-Obieze/learnable-node-api1.git
+git clone https://github.com/Ken-Obieze/learnable-node-api2.git
 
 # Navigate to the project directory
 cd learnable-node-api1

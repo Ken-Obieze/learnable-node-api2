@@ -21,7 +21,7 @@ The following instructions would guide you on how to install and set up this pro
 
 ```bash
 # Clone the repository
-git clone https://github.com/Ken-Obieze/learnable-node-api1.git
+git clone https://github.com/Ken-Obieze/learnable-node-api2.git
 
 # Navigate to the project directory
 cd learnable-node-api1
@@ -42,3 +42,8 @@ npm start
 * Express.js
 * MongoDB
 * Mongoose
+* jsonwebtoken
+* cors
+* joi
+* joi-objectid
+* bcrypt
